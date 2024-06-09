@@ -1,9 +1,9 @@
-export default function AddTask({...props}) {
+export default function AddTask({clickCancel, clickSave, ...props}) {
     return (
         <form {...props} className="mt-4 text-left w-[50vw]">
             <menu className="flex items-center justify-end gap-4 my-4">
-                <button className="text-stone-800 hover:text-stone-950">Cancel</button>
-                <button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">Save</button>
+                <button onClick={clickCancel} className="text-stone-800 hover:text-stone-950">Cancel</button>
+                <button onClick={clickSave} className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">Save</button>
             </menu>
             
             <label className="text-sm font-bold uppercase text-stone-500">TITLE</label>

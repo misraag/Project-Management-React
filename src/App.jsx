@@ -11,11 +11,21 @@ function App() {
     setMainPage(false);
   }
 
+  function handleAddTaskCancelled() {
+    console.log("added task is cancelled");
+    setMainPage(true);
+  }
+
+  function handleAddTaskSaved() {
+    console.log("added task is saved");
+    setMainPage(true);
+  }
+
   return (
     <div className="flex h-screen my-8 flex gap-8">
-      <YourProjects class="flex w-[35vw] bg-red-800"/>
+      <YourProjects/>
       {mainPage && <Main addTask={handleAddNewTask}/>}
-      {!mainPage && <AddTask/>}
+      {!mainPage && <AddTask clickCancel={handleAddTaskCancelled} clickSave={handleAddTaskSaved}/>}
     </div>
   );
 }
