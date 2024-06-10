@@ -29,7 +29,6 @@ export default function AddProject({ clickCancel, clickSave, ...props }) {
       event.preventDefault();
     }
   }
-  
 
   return (
     <form

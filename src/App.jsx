@@ -12,6 +12,7 @@ function App() {
   function handleAddProject() {
     console.log("add new task");
     setMainPage("Add-Task");
+    setSelectedProject(null)
   }
 
   function handleAddProjectCancelled(data) {
@@ -64,11 +65,13 @@ function App() {
   }
 
   function handleDeleteProject(id) {
-    console.log("Deleting Project with id ", id)
-    const updatedProjects = listOfProjects.filter((project) => project.id !== id);
+    console.log("Deleting Project with id ", id);
+    const updatedProjects = listOfProjects.filter(
+      (project) => project.id !== id
+    );
 
-    setListOfProjects(updatedProjects)
-    setMainPage("Main-Page")
+    setListOfProjects(updatedProjects);
+    setMainPage("Main-Page");
     setSelectedProject(null);
   }
 
@@ -78,6 +81,7 @@ function App() {
         listOfProjects={listOfProjects}
         viewNewTask={handleViewTask}
         selectedProject={selectedProject}
+        addNewProject={handleAddProject}
       />
       {mainPage === "Main-Page" && <Main addTask={handleAddProject} />}
       {mainPage === "Add-Task" && (
@@ -96,6 +100,7 @@ function App() {
           deleteProject={handleDeleteProject}
         />
       )}
+      
     </div>
   );
 }
