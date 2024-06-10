@@ -1,6 +1,6 @@
 import { useRef } from "react"
 
-export default function AddTask({clickCancel, clickSave, ...props}) {
+export default function AddProject({clickCancel, clickSave, ...props}) {
 
     const title = useRef();
     const description = useRef();
@@ -13,7 +13,8 @@ export default function AddTask({clickCancel, clickSave, ...props}) {
         const newTask = {
             title: title.current.value,
             description: description.current.value,
-            dueDate: dueDate.current.value
+            dueDate: dueDate.current.value,
+            tasks: []
           };
           clickSave(newTask);
     }
