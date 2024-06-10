@@ -1,4 +1,7 @@
 import { useRef } from "react"
+import { v4 as uuidv4 } from "uuid";
+
+
 
 export default function AddProject({clickCancel, clickSave, ...props}) {
 
@@ -11,6 +14,7 @@ export default function AddProject({clickCancel, clickSave, ...props}) {
         event.preventDefault();
 
         const newTask = {
+            id: generateUniqueId(),
             title: title.current.value,
             description: description.current.value,
             dueDate: dueDate.current.value,
@@ -18,6 +22,11 @@ export default function AddProject({clickCancel, clickSave, ...props}) {
           };
           clickSave(newTask);
     }
+
+    function generateUniqueId() {
+        return uuidv4(); // Generate a version 4 UUID as the ID
+      }
+      
     
 
     return (

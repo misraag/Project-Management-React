@@ -4,6 +4,7 @@ export default function ViewTask({
   listOfProjects,
   selectedProject,
   addTask,
+  deleteTask,
   ...props
 }) {
   const taskRef = useRef();
@@ -15,8 +16,14 @@ export default function ViewTask({
     console.log("Adding new task to project");
     console.log(taskRef.current.value);
     
-    addTask(taskRef.current.value);
+    addTask(project.id, taskRef.current.value);
+  }
 
+  function handleDeleteTask(index) {
+    console.log("Deleting a task")
+    // const taskIndex = project.tasks.findIndex((task) => task === taskRef.current.value);
+    console.log(project.id, index);
+    deleteTask(project.id, index);
   }
 
   return (
@@ -44,10 +51,10 @@ export default function ViewTask({
         </div>
         <ul className="bg-stone-100 mt-7 p-5">
             {
-                project.tasks.map((task) => {
-                    return <div className="flex my-4 justify-between">
+                project.tasks.map((task, index) => {
+                    return <div className="flex my-4 justify-between" key={index}>
                         <li className=" ">{task}</li>
-                        <button>Clear</button>
+                        <button onClick={() => handleDeleteTask(index)}>Clear</button>
                     </div>
                 })
             }

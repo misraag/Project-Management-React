@@ -32,13 +32,11 @@ function App() {
     console.log(title);
   }
 
-  function handleAddTaskToProject(data) {
+  function handleAddTaskToProject(id, data) {
     console.log("Clicked on add task to existing project", data);
-    const project = listOfProjects.find((item) => item.title === selectedProject)
-    // console.log(project.tasks)
 
     const updatedProjects = listOfProjects.map((project) => {
-      if(project.title === selectedProject) {
+      if(project.id === id) {
         const updatedTasks = [data, ...project.tasks];
         return {...project, tasks: updatedTasks};
       }
@@ -49,12 +47,27 @@ function App() {
     
   }
 
+  function handleDeleteTaskToProject(id, taskIndex) {
+    console.log("deleting the task with index: ", taskIndex)
+
+    const updatedProjects = listOfProjects.map((project) => {
+      if(project.id === id) {
+        const updatedTasks = project.tasks.filter((task, index) => index !== taskIndex)
+        return {...project, tasks: updatedTasks};
+      }
+
+      return project;
+    })
+
+    setListOfProjects(updatedProjects);
+  } 
+
   return (
     <div className="flex h-screen my-8 flex gap-8">
       <YourProjects listOfProjects={listOfProjects} viewNewTask={handleViewTask}/>
       {mainPage==="Main-Page" && <Main addTask={handleAddProject}/>}
-      {mainPage==="Add-Task" && <AddProject clickCancel={handleAddProjectCancelled} clickSave={handleAddProjectSaved}/>}
-      {mainPage==="View-Task" && <ViewTask listOfProjects={listOfProjects} selectedProject={selectedProject} addTask={handleAddTaskToProject}/>}
+      {mainPage==="Add-Task" && <AddProject clickCancel={handleAddProjectCancelled} clickSave={handleAddProjectSaved} id={listOfProjects}/>}
+      {mainPage==="View-Task" && <ViewTask listOfProjects={listOfProjects} selectedProject={selectedProject} addTask={handleAddTaskToProject} deleteTask={handleDeleteTaskToProject}/>}
     </div>
   );
 }
