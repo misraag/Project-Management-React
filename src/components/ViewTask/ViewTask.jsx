@@ -5,6 +5,7 @@ export default function ViewTask({
   selectedProject,
   addTask,
   deleteTask,
+  deleteProject,
   ...props
 }) {
   const taskRef = useRef();
@@ -17,6 +18,7 @@ export default function ViewTask({
     console.log(taskRef.current.value);
     
     addTask(project.id, taskRef.current.value);
+    taskRef.current.value = ""
   }
 
   function handleDeleteTask(index) {
@@ -27,8 +29,8 @@ export default function ViewTask({
   }
 
   return (
-    <div className="flex flex-col h-screen my-8">
-      <div className="flex justify-around items-start py-6">
+    <div className="flex flex-col h-screen my-8 w-[50vw]">
+      <div className="flex justify-between items-start py-6">
         <div className="flex flex-col gap-3">
           <h1 className="text-[25px] font-bold text-stone-700">
             {project.title}
@@ -36,16 +38,16 @@ export default function ViewTask({
           <p className="text-gray-500">{project.dueDate}</p>
           <p className="text-gray-600">{project.description}</p>
         </div>
-        <button>Delete</button>
+        <button onClick={() => deleteProject(project.id)} className="m-5">Delete</button>
       </div>
       <hr className="my-2"></hr>
       <div>
-        <h1 className="text-[25px] font-bold text-stone-700">Tasks</h1>
+        <h1 className="text-[25px] font-bold text-stone-700 my-6">Tasks</h1>
         <div className="flex gap-3">
           <input
             type="text"
             ref={taskRef}
-            className="p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
+            className="w-[40%] p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
           ></input>
           <button onClick={handleAddNewTask}>Add Task</button>
         </div>

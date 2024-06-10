@@ -26,7 +26,7 @@ function App() {
   }
 
   function handleViewTask(title) {
-    console.log("clicked to view the project")
+    console.log("clicked to view the project");
     setSelectedProject(title);
     setMainPage("View-Task");
     console.log(title);
@@ -36,38 +36,66 @@ function App() {
     console.log("Clicked on add task to existing project", data);
 
     const updatedProjects = listOfProjects.map((project) => {
-      if(project.id === id) {
+      if (project.id === id) {
         const updatedTasks = [data, ...project.tasks];
-        return {...project, tasks: updatedTasks};
+        return { ...project, tasks: updatedTasks };
       }
       return project;
-    })
+    });
 
-    setListOfProjects(updatedProjects)
-    
+    setListOfProjects(updatedProjects);
   }
 
   function handleDeleteTaskToProject(id, taskIndex) {
-    console.log("deleting the task with index: ", taskIndex)
+    console.log("deleting the task with index: ", taskIndex);
 
     const updatedProjects = listOfProjects.map((project) => {
-      if(project.id === id) {
-        const updatedTasks = project.tasks.filter((task, index) => index !== taskIndex)
-        return {...project, tasks: updatedTasks};
+      if (project.id === id) {
+        const updatedTasks = project.tasks.filter(
+          (task, index) => index !== taskIndex
+        );
+        return { ...project, tasks: updatedTasks };
       }
 
       return project;
-    })
+    });
 
     setListOfProjects(updatedProjects);
-  } 
+  }
+
+  function handleDeleteProject(id) {
+    console.log("Deleting Project with id ", id)
+    const updatedProjects = listOfProjects.filter((project) => project.id !== id);
+
+    setListOfProjects(updatedProjects)
+    setMainPage("Main-Page")
+    setSelectedProject(null);
+  }
 
   return (
     <div className="flex h-screen my-8 flex gap-8">
-      <YourProjects listOfProjects={listOfProjects} viewNewTask={handleViewTask}/>
-      {mainPage==="Main-Page" && <Main addTask={handleAddProject}/>}
-      {mainPage==="Add-Task" && <AddProject clickCancel={handleAddProjectCancelled} clickSave={handleAddProjectSaved} id={listOfProjects}/>}
-      {mainPage==="View-Task" && <ViewTask listOfProjects={listOfProjects} selectedProject={selectedProject} addTask={handleAddTaskToProject} deleteTask={handleDeleteTaskToProject}/>}
+      <YourProjects
+        listOfProjects={listOfProjects}
+        viewNewTask={handleViewTask}
+        selectedProject={selectedProject}
+      />
+      {mainPage === "Main-Page" && <Main addTask={handleAddProject} />}
+      {mainPage === "Add-Task" && (
+        <AddProject
+          clickCancel={handleAddProjectCancelled}
+          clickSave={handleAddProjectSaved}
+          id={listOfProjects}
+        />
+      )}
+      {mainPage === "View-Task" && (
+        <ViewTask
+          listOfProjects={listOfProjects}
+          selectedProject={selectedProject}
+          addTask={handleAddTaskToProject}
+          deleteTask={handleDeleteTaskToProject}
+          deleteProject={handleDeleteProject}
+        />
+      )}
     </div>
   );
 }

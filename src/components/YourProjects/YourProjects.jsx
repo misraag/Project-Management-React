@@ -1,6 +1,7 @@
 export default function YourProjects({
   listOfProjects,
   viewNewTask,
+  selectedProject,
   ...props
 }) {
   return (
@@ -19,7 +20,7 @@ export default function YourProjects({
           return (
             <li
               onClick={() => viewNewTask(listItem.title)}
-              className="bg-red-300 my-4 hover:cursor-pointer"
+              className={`my-4 hover:cursor-pointer p-2 rounded-md ${selectedProject===listItem.title ? "text-white bg-stone-600": "text-stone-400"}`}
             >
               {listItem.title}
             </li>
