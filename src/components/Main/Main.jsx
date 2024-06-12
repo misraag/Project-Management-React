@@ -1,4 +1,5 @@
 import imageLogo from "../../assets/no-projects.png";
+import Button from "../AddProjectButton/AddProjectButton";
 
 export default function Main({ addTask, ...props }) {
   return (
@@ -11,13 +12,9 @@ export default function Main({ addTask, ...props }) {
       <p className=" text-gray-300">
         Select a project or get started with a new one
       </p>
-      <button
-        type="submit"
-        onClick={addTask}
-        className='className="px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100"'
-      >
+      <Button type="submit" onClick={addTask}>
         Create new project
-      </button>
+      </Button>
     </div>
   );
 }

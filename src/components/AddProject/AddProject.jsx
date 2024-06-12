@@ -57,35 +57,6 @@ export default function AddProject({ clickCancel, clickSave, ...props }) {
       <FormRef labelName="DESCRIPTION*" isTextArea type="text" ref={description}/>
       <FormRef labelName="DUE DATE*" type="date" ref={dueDate}/>
 
-      {/* <label className="text-sm font-bold uppercase text-stone-500">
-        TITLE*
-      </label>
-      <input
-        required
-        type="text"
-        ref={title}
-        className="w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
-      ></input>
-
-      <label className="text-sm font-bold uppercase text-stone-500">
-        DESCRIPTION*
-      </label>
-      <input
-        required
-        type="text"
-        ref={description}
-        className="w-full h-[100px] p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
-      ></input>
-
-      <label className="text-sm font-bold uppercase text-stone-500">
-        DUE DATE*
-      </label>
-      <input
-        required
-        type="date"
-        ref={dueDate}
-        className="w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
-      ></input> */}
     </form>
   );
 }
