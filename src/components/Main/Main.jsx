@@ -4,7 +4,7 @@ export default function Main({ addTask, ...props }) {
   return (
     <div
       {...props}
-      className="flex flex-col w-[50vw] text-center justify-center items-center space-y-5"
+      className="flex flex-col w-[50vw] text-center items-center space-y-5 mt-16"
     >
       <img className="h-[60px] w-[60px]" src={imageLogo}></img>
       <h2 className=" font-bold text-gray-700">No Projects Selected</h2>

@@ -76,7 +76,7 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen my-8 flex gap-8">
+    <main className="flex h-screen my-8 flex gap-8 w-[2/3]">
       <YourProjects
         listOfProjects={listOfProjects}
         viewNewTask={handleViewTask}
@@ -101,7 +101,7 @@ function App() {
         />
       )}
       
-    </div>
+    </main>
   );
 }
 

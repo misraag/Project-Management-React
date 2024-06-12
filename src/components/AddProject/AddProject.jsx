@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import FormRef from "../Form/Form";
 
 export default function AddProject({ clickCancel, clickSave, ...props }) {
   const title = useRef();
@@ -52,7 +53,11 @@ export default function AddProject({ clickCancel, clickSave, ...props }) {
         </button>
       </menu>
 
-      <label className="text-sm font-bold uppercase text-stone-500">
+      <FormRef labelName="TITLE*" type="text" ref={title}/>
+      <FormRef labelName="DESCRIPTION*" isTextArea type="text" ref={description}/>
+      <FormRef labelName="DUE DATE*" type="date" ref={dueDate}/>
+
+      {/* <label className="text-sm font-bold uppercase text-stone-500">
         TITLE*
       </label>
       <input
@@ -80,7 +85,7 @@ export default function AddProject({ clickCancel, clickSave, ...props }) {
         type="date"
         ref={dueDate}
         className="w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
-      ></input>
+      ></input> */}
     </form>
   );
 }
