@@ -16,9 +16,9 @@ export default function YourProjects({
       <Button onClick={addNewProject}>+ Add Project</Button>
 
       <ul>
-        {listOfProjects.map((listItem) => {
+        {listOfProjects.map((listItem, index) => {
           return (
-            <li
+            <li key={index}
               onClick={() => viewNewTask(listItem.title)}
               className={`my-4 hover:cursor-pointer p-2 rounded-md ${
                 selectedProject === listItem.title

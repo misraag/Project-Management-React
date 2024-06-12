@@ -8,9 +8,8 @@ export default function AddProject({ clickCancel, clickSave, ...props }) {
   const dueDate = useRef();
 
   function handleFormSubmit(event) {
-    console.log("Form Is Submitted");
     event.preventDefault();
-
+    
     const newTask = {
       id: generateUniqueId(),
       title: title.current.value,

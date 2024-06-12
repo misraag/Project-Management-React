@@ -9,33 +9,30 @@ function App() {
   const [listOfProjects, setListOfProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  //CREATING NEW PROJECT***********************************************
   function handleAddProject() {
-    console.log("add new task");
     setMainPage("Add-Task");
-    setSelectedProject(null)
+    setSelectedProject(null);
   }
 
-  function handleAddProjectCancelled(data) {
-    console.log("added task is cancelled");
-    setMainPage("Main-Page");
-  }
-
+  // ADD PROJECT FUNCTIONS**********************************************
   function handleAddProjectSaved(newTask) {
-    console.log("added task is saved", newTask);
     setListOfProjects((prevProjects) => [...prevProjects, newTask]);
     setMainPage("Main-Page");
   }
 
-  function handleViewTask(title) {
-    console.log("clicked to view the project");
-    setSelectedProject(title);
-    setMainPage("View-Task");
-    console.log(title);
+  function handleAddProjectCancelled(data) {
+    setMainPage("Main-Page");
   }
 
-  function handleAddTaskToProject(id, data) {
-    console.log("Clicked on add task to existing project", data);
+  //SIDEBAR FUNCTIONS****************************************************
+  function handleViewTask(title) {
+    setSelectedProject(title);
+    setMainPage("View-Task");
+  }
 
+  //VIEW-TASK FUNCTIONS***************************************************
+  function handleAddTaskToProject(id, data) {
     const updatedProjects = listOfProjects.map((project) => {
       if (project.id === id) {
         const updatedTasks = [data, ...project.tasks];
@@ -43,13 +40,10 @@ function App() {
       }
       return project;
     });
-
     setListOfProjects(updatedProjects);
   }
 
   function handleDeleteTaskToProject(id, taskIndex) {
-    console.log("deleting the task with index: ", taskIndex);
-
     const updatedProjects = listOfProjects.map((project) => {
       if (project.id === id) {
         const updatedTasks = project.tasks.filter(
@@ -57,23 +51,21 @@ function App() {
         );
         return { ...project, tasks: updatedTasks };
       }
-
       return project;
     });
-
     setListOfProjects(updatedProjects);
   }
 
   function handleDeleteProject(id) {
-    console.log("Deleting Project with id ", id);
     const updatedProjects = listOfProjects.filter(
       (project) => project.id !== id
     );
-
     setListOfProjects(updatedProjects);
     setMainPage("Main-Page");
     setSelectedProject(null);
   }
+
+  // ********************************************************************
 
   return (
     <main className="flex h-screen my-8 flex gap-8 w-[2/3]">
@@ -100,7 +92,6 @@ function App() {
           deleteProject={handleDeleteProject}
         />
       )}
-      
     </main>
   );
 }

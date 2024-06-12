@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState} from "react";
 
 export default function ViewTask({
   listOfProjects,
@@ -8,25 +8,25 @@ export default function ViewTask({
   deleteProject,
   ...props
 }) {
-  const taskRef = useRef();
+  const [taskValue, setTaskValue] = useState("");
+  
   const project = listOfProjects.find(
     (project) => project.title === selectedProject
   );
 
   function handleAddNewTask() {
-    console.log("Adding new task to project");
-    console.log(taskRef.current.value);
-    if (taskRef.current.value.length > 0) {
-      addTask(project.id, taskRef.current.value);
-      taskRef.current.value = "";
+    if (taskValue.length > 0) {
+      addTask(project.id, taskValue);
+      setTaskValue("");
     }
   }
 
   function handleDeleteTask(index) {
-    console.log("Deleting a task");
-    // const taskIndex = project.tasks.findIndex((task) => task === taskRef.current.value);
-    console.log(project.id, index);
     deleteTask(project.id, index);
+  }
+
+  if (!project) {
+    return <div>No project found</div>;
   }
 
   return (
@@ -49,17 +49,18 @@ export default function ViewTask({
         <div className="flex gap-3">
           <input
             type="text"
+            value={taskValue}
+            onChange={(e) => setTaskValue(e.target.value)}
             required
-            ref={taskRef}
             className="w-[40%] p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600"
-          ></input>
+          />
           <button onClick={handleAddNewTask}>Add Task</button>
         </div>
         <ul className="bg-stone-100 mt-7 p-5">
           {project.tasks.map((task, index) => {
             return (
               <div className="flex my-4 justify-between" key={index}>
-                <li className=" ">{task}</li>
+                <li>{task}</li>
                 <button onClick={() => handleDeleteTask(index)}>Clear</button>
               </div>
             );
